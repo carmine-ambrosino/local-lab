@@ -35,4 +35,5 @@ variable "network_id" {
 variable "cloudinit_tpl" {
   description = "Cloud-init user-data content"
   type        = string
+  default     = null
 }

@@ -21,7 +21,7 @@ module "vms" {
   base_image    = each.value.base_image
   memory        = each.value.memory
   vcpu          = each.value.vcpu
-  disk_size     = each.value.disk_size
   network_id    = var.provider_type == "libvirt" ? one(libvirt_network.lab_net[*].id) : null
+  disk_size     = each.value.disk_size
   cloudinit_tpl = file(each.value.cloudinit_file)
 }

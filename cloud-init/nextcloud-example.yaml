@@ -15,7 +15,7 @@ write_files:
     content: |
       #!/bin/bash
       set -euo pipefail
-      echo "[INFO] Pacchetti base già installati via cloud-init"
+      echo "[INFO] Base packages already installed via cloud-init..."
   
   - path: /opt/setup/20-docker-install.sh
     permissions: '0755'
@@ -23,15 +23,15 @@ write_files:
     content: |
       #!/bin/bash
       set -euo pipefail
-      echo "[INFO] Rimozione versioni precedenti di Docker..."
+      echo "[INFO] Removing previous versions of Docker..."
       apt-get remove -y docker.io docker-doc docker-compose podman-docker containerd runc || true
 
-      echo "[INFO] Aggiunta chiave GPG di Docker..."
+      echo "[INFO] Adding Docker GPG key..."
       install -m 0755 -d /etc/apt/keyrings
       curl -fsSL https://download.docker.com/linux/debian/gpg -o /etc/apt/keyrings/docker.asc
       chmod a+r /etc/apt/keyrings/docker.asc
 
-      echo "[INFO] Aggiunta repository..."
+      echo "[INFO] Adding repository..."
       codename=$(lsb_release -cs)
       echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] \
         https://download.docker.com/linux/debian $codename stable" \
@@ -48,11 +48,11 @@ write_files:
     content: |
       #!/bin/bash
       set -euo pipefail
-      echo "[INFO] Clonazione repo Nextcloud S3..."
+      echo "[INFO] Cloning Nextcloud S3 repo..."
       git clone https://github.com/carmine-ambrosino/nextcloud-s3.git /opt/nextcloud-s3
       cd /opt/nextcloud-s3/compose
       cp .env.example .env
-      echo "[INFO] Avvio dei container..."
+      echo "[INFO] Starting containers..."
       docker compose up -d
 
 runcmd:
