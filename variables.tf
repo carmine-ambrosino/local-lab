@@ -26,6 +26,7 @@ EOT
     base_image     = string
     memory         = number
     vcpu           = number
+    disk_size      = number
     cloudinit_file = string
   }))
 }

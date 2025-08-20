@@ -1,4 +1,3 @@
-# Flatten VM groups into a single map
 locals {
   vm_defs = merge([
     for group_name, group in var.vm_groups : {
@@ -8,6 +7,7 @@ locals {
         memory         = group.memory
         vcpu           = group.vcpu
         cloudinit_file = group.cloudinit_file
+        disk_size      = group.disk_size
       }
     }
   ]...)

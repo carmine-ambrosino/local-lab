@@ -11,6 +11,7 @@ resource "libvirt_volume" "disk" {
   base_volume_id = libvirt_volume.base.id
   pool           = "default"
   format         = "qcow2"
+  size           = var.disk_size * 1024 * 1024 * 1024
 }
 
 # Cloud-init ISO with unique name
@@ -25,6 +26,10 @@ resource "libvirt_domain" "vm" {
   name   = var.vm_name
   memory = var.memory
   vcpu   = var.vcpu
+  
+  cpu {
+      mode = "host-passthrough"
+  }
 
   network_interface {
     network_id     = var.network_id

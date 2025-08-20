@@ -14,13 +14,14 @@ resource "libvirt_network" "lab_net" {
 
 # Create VMs using libvirt module
 module "vms" {
-  source = "./providers/${var.provider_type}/vm"
-
+  source        = "./providers/${var.provider_type}/vm"
   for_each      = local.vm_defs
+
   vm_name       = each.value.vm_name
   base_image    = each.value.base_image
   memory        = each.value.memory
   vcpu          = each.value.vcpu
+  disk_size     = each.value.disk_size
   network_id    = var.provider_type == "libvirt" ? one(libvirt_network.lab_net[*].id) : null
   cloudinit_tpl = file(each.value.cloudinit_file)
 }
