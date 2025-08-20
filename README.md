@@ -1,8 +1,8 @@
 # 🧪 local-lab  
 **Your personal cloud-in-a-box.**  
-Spin up **virtual labs** with Terraform / OpenTofu + libvirt in minutes.  
-Simple. Modular. Fun.  
+**Spin up virtual labs** with **OpenTofu** (or Terraform) + libvirt in **minutes.**  
 
+*Simple. Modular. Fun.*
 
 ## ✨ Why local-lab?
 Imagine spinning up a **Nextcloud server** ☁️ or a **Kali Linux hacking box** 🐉 with a single command.  
@@ -31,7 +31,7 @@ It’s like having **AWS on your laptop**, but without the bill 💸.
 
 ### 1. Download Images
 - [Debian 13 Generic Cloud](https://cloud.debian.org/images/cloud/trixie/latest/debian-13-genericcloud-amd64.qcow2)  
-- [Kali Linux 2025.2 QEMU](https://cdimage.kali.org/current/kali-linux-2025.2-qemu-amd64.7z) → unzip to `.qcow2`  
+- [Kali Linux 2025.2 QEMU](https://cdimage.kali.org/current/kali-linux-2025.2-qemu-amd64.7z) ➡️ unzip to `.qcow2`  
 
 
 ### 2. Define your lab (`terraform.tfvars`)
