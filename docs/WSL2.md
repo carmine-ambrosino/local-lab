@@ -80,6 +80,31 @@ git clone https://github.com/carmine-ambrosino/local-lab.git
 cd local-lab
 ```
 
+## Create your .tfvars
+```hcl
+vm_groups = {
+  nextcloud = {
+    count          = 1
+    base_image     = "./images/debian-13-genericcloud-amd64.qcow2"
+    memory         = 6162
+    vcpu           = 2
+    disk_size      = 30
+    cloudinit_file = "./cloud-init/nextcloud-example.yaml"
+  }
+
+  kali = {
+    count          = 1
+    base_image     = "./images/kali-linux-2025.2-qemu-amd64.qcow2"
+    memory         = 2048
+    vcpu           = 2
+    disk_size      = 80
+    cloudinit_file = "./cloud-init/kali-example.yaml"
+  }
+}
+```
+
+> ⚠️ Make sure of your cloud-init file
+
 ## Init e apply
 ``` bash
 tofu init
