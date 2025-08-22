@@ -51,6 +51,11 @@ sudo systemctl start libvirtd
 sudo usermod -aG libvirt $(whoami)
 ```
 
+## Install required packages
+``` bash
+sudo apt install curl git
+``` 
+
 ## Install opentofu
 ``` bash
 # Download the installer script:
