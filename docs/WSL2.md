@@ -1,4 +1,4 @@
-# WLS2 Local lab
+# WSL2 Local lab
 ## Prerequisites
 Before starting, make sure you have:
 
@@ -28,31 +28,9 @@ wsl --install -d Ubuntu
 
 4. Launch Ubuntu and create your Linux user.
 
-## Enable Nested Virtualization for WSL2
-1. Find the WSL VM name 
-In PowerShell (Admin):
-``` powershell
-Get-VM
-```
-Look for the VM named WSL or similar.
+## WSL2 setting
+- Assicurati che https://learn.microsoft.com/en-us/windows/wsl/wsl-config
 
-2. Expose virtualization extensions:
-``` powershell
-Set-VMProcessor -VMName <YourWSLVMName> -ExposeVirtualizationExtensions $true
-```
-
-3. Allocate enough resources 
-Create or edit C:\Users\<YourUser>\.wslconfig:
-``` bash
-[wsl2]
-memory=12GB
-processors=6
-```
-
-4. Restart WSL
-``` powershell
-wsl --shutdown
-```
 
 ## Install KVM and libvirt in WSL2
 
@@ -74,8 +52,27 @@ sudo usermod -aG libvirt $(whoami)
 ```
 
 ## Install opentofu
+``` bash
+# Download the installer script:
+curl --proto '=https' --tlsv1.2 -fsSL https://get.opentofu.org/install-opentofu.sh -o install-opentofu.sh
+# Alternatively: wget --secure-protocol=TLSv1_2 --https-only https://get.opentofu.org/install-opentofu.sh -O install-opentofu.sh
+
+# Give it execution permissions:
+chmod +x install-opentofu.sh
+
+# Please inspect the downloaded script
+
+# Run the installer:
+./install-opentofu.sh --install-method deb
+
+# Remove the installer:
+rm -f install-opentofu.sh
+```
 
 ## Clone repository
+``` bash
+git clone https://github.com/carmine-ambrosino/local-lab.git
+```
 
 ## Init e apply
 ``` bash
