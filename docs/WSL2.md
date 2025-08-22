@@ -29,7 +29,7 @@ wsl --install -d Ubuntu
 4. Launch Ubuntu and create your Linux user.
 
 ## WSL2 setting
-- Assicurati che https://learn.microsoft.com/en-us/windows/wsl/wsl-config
+
 
 
 ## Install KVM and libvirt in WSL2
