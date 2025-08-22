@@ -81,6 +81,10 @@ cd local-lab
 ```
 
 ## Create your .tfvars
+``` bash
+touch terraform.tfvars
+```
+
 ```hcl
 vm_groups = {
   nextcloud = {
