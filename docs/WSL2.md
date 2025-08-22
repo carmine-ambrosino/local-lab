@@ -29,8 +29,8 @@ wsl --install -d Ubuntu
 4. Launch Ubuntu and create your Linux user.
 
 ## WSL2 setting
-
-
+Make sure you have enough RAM and vCPU for WSL. Check WSL Settings.
+More info: [Learn Microsoft WSL config](https://learn.microsoft.com/en-us/windows/wsl/wsl-config#configuration-settings-for-wslconfig)
 
 ## Install KVM and libvirt in WSL2
 
@@ -77,6 +77,7 @@ rm -f install-opentofu.sh
 ## Clone repository
 ``` bash
 git clone https://github.com/carmine-ambrosino/local-lab.git
+cd local-lab
 ```
 
 ## Init e apply
