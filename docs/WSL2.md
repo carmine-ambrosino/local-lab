@@ -107,7 +107,7 @@ vm_groups = {
 }
 ```
 
-> ⚠️ Make sure of your cloud-init file
+> ⚠️ Make sure of your cloud-init file, base_image etc.
 
 ## Init e apply
 ``` bash
