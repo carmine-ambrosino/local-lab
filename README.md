@@ -44,7 +44,7 @@ vm_groups = {
     memory         = 6162
     vcpu           = 2
     disk_size      = 30
-    cloudinit_file = "./cloud-init/nextcloud-example.yaml"
+    cloudinit_file = "./cloud-init/nextcloud-s3-example.yaml"
   }
 
   kali = {
