@@ -11,8 +11,7 @@ With `local-lab` you get:
 - 🚀 **One-command labs** ➡️ `tofu apply` and you’re live  
 - 🧩 **Modular design** ➡️ easily add or clone VMs  
 - 🔁 **Multi-VM scaling** with `count`  
-- 💾 **Local-first** ➡️ no cloud dependency, no hidden costs  
-- 🔮 **Future-ready** ➡️ more providers coming soon (VirtualBox, …)  
+- 💾 **Local-first** ➡️ no cloud dependency, no hidden costs   
 
 It’s like having **AWS on your laptop**, but without the bill 💸.  
 
@@ -103,6 +102,3 @@ A:
 ## 💡 Final Thought
 `local-lab` is your **private mini-cloud**, always one command away.  
 Spin up, hack, test, self-host — all **from your laptop**.  
-
-- 🟢 **Today**: Libvirt + KVM  
-- 🔮 **Tomorrow**: VirtualBox, Proxmox and beyond ✨ 
