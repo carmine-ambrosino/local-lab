@@ -59,7 +59,7 @@ vm_groups = {
 }
 ```
 
-### 3. Destroy when done
+### 3. Launch local-lab
 ``` bash
 tofu init
 tofu apply
