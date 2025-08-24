@@ -33,6 +33,7 @@ resource "libvirt_domain" "vm" {
 
   network_interface {
     network_id     = var.network_id
+    addresses  = var.ip_address != null ? [var.ip_address] : []
     wait_for_lease = true
   }
 

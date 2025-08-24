@@ -7,20 +7,10 @@ variable "provider_type" {
 variable "network_cidr" {
   description = "CIDR block for the libvirt NAT network"
   type        = string
-  default     = "192.168.250.0/24"
 }
 
-
 variable "vm_groups" {
-  description = <<EOT
-Map of VM groups. Each group specifies:
-- count: number of VMs
-- base_image: path to base cloud image
-- memory: RAM in MB
-- vcpu: number of vCPUs
-- cloudinit_file: path to cloud-init YAML file
-EOT
-
+  description = "VM groups definition"
   type = map(object({
     count          = number
     base_image     = string
@@ -28,5 +18,7 @@ EOT
     vcpu           = number
     disk_size      = number
     cloudinit_file = string
+    ip_address     = optional(string)
   }))
 }
+

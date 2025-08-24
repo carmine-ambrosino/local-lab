@@ -42,37 +42,39 @@ write_files:
 
       systemctl enable --now docker
 
-  - path: /opt/setup/30-nextcloud-setup.sh
+  - path: /opt/setup/30-prometheus-grafana.yaml
     permissions: '0755'
     owner: root:root
     content: |
       #!/bin/bash
       set -euo pipefail
-      echo "[INFO] Cloning Nextcloud S3 repo..."
-      git clone https://github.com/carmine-ambrosino/nextcloud-s3.git /opt/nextcloud-s3
-      cd /opt/nextcloud-s3/compose
-      cp .env.example .env
-      echo "[INFO] Starting containers..."
-      docker compose up -d
-      
-  - path: /opt/setup/40-netdata-setup.sh
-    permissions: '0755'
-    owner: root:root
-    content: |
-      #!/bin/bash
-      set -euo pipefail
-      echo "[INFO] Netdata installation..."
-      curl https://get.netdata.cloud/kickstart.sh > /tmp/netdata-kickstart.sh && sh /tmp/netdata-kickstart.sh --stable-channel --disable-telemetry
-      echo "[INFO] COMPLETE: Netdata installation..."
 
+  - path: /opt/setup/40-monitoring-setup.sh
+    permissions: '0755'
+    owner: root:root
+    content: |
+      #!/bin/bash
+      set -euo pipefail
+      
 runcmd:
   - /opt/setup/10-base-packages.sh
   - /opt/setup/20-docker-install.sh
-  - /opt/setup/30-nextcloud-setup.sh
-  - /opt/setup/40-netdata-setup.sh
-
+  - /opt/setup/40-monitoring-setup.sh
+  
 growpart:
   mode: auto
   devices: ['/']
   ignore_growroot_disabled: false
 
+users:
+  - name: user
+    gecos: "Lab User"
+    groups: sudo
+    shell: /bin/bash
+    lock_passwd: false
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    passwd: "$6$fIxd5uGdyYX6sh/L$XtcFvmqz3T9fjy/uUl18aTaSTKBSUoh9zKMzDlrD69e56wTDPiOD60tUV66El8H4mvMwKL2fZQ8aTH3aBvQOz/"
+
+ssh_pwauth: true
+chpasswd:
+  expire: false

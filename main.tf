@@ -4,24 +4,23 @@ resource "libvirt_network" "lab_net" {
   name      = "labnet-${terraform.workspace}"
   mode      = "nat"
   domain    = "labnet-${terraform.workspace}.local"
-
-  # Use a custom free CIDR
   addresses = [var.network_cidr]
-
   autostart = true
 }
 
 
 # Create VMs using libvirt module
 module "vms" {
-  source        = "./providers/${var.provider_type}/vm"
-  for_each      = local.vm_defs
+  source      = "./providers/${var.provider_type}/vm"
+  for_each    = local.vm_defs
 
-  vm_name       = each.value.vm_name
-  base_image    = each.value.base_image
-  memory        = each.value.memory
-  vcpu          = each.value.vcpu
-  network_id    = var.provider_type == "libvirt" ? one(libvirt_network.lab_net[*].id) : null
-  disk_size     = each.value.disk_size
+  vm_name     = each.value.vm_name
+  base_image  = each.value.base_image
+  memory      = each.value.memory
+  vcpu        = each.value.vcpu
+  disk_size   = each.value.disk_size
   cloudinit_tpl = file(each.value.cloudinit_file)
+  network_id  = var.provider_type == "libvirt" ? one(libvirt_network.lab_net[*].id) : null
+  ip_address  = each.value.ip_address
 }
+
