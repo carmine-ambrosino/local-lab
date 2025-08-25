@@ -7,6 +7,7 @@ variable "provider_type" {
 variable "network_cidr" {
   description = "CIDR block for the libvirt NAT network"
   type        = string
+  default     = "192.168.250.0/24"
 }
 
 variable "vm_groups" {

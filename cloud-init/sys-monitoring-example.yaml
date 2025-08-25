@@ -50,7 +50,7 @@ write_files:
       #!/bin/bash
       set -euo pipefail
       echo "[INFO] Cloning System monitoring stack repo..."
-      git clone https://github.com/carmine-ambrosino/system-monitoring-stack.git /opt/system-monitoring-stack
+      git clone https://github.com/simona2606/system-monitoring-stack.git /opt/system-monitoring-stack
       cd /opt/system-monitoring-stack/monitoring
       echo "[INFO] Starting containers..."
       docker compose up -d
