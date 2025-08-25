@@ -7,7 +7,7 @@ locals {
         memory        = group.memory
         vcpu          = group.vcpu
         disk_size     = group.disk_size
-        cloudinit_file= group.cloudinit_file
+        cloudinit_file = try(group.cloudinit_file, null)
         ip_address = group.ip_address == null ? null : [group.ip_address[i]]
       }
     }

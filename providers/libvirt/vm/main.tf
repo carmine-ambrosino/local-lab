@@ -16,6 +16,7 @@ resource "libvirt_volume" "disk" {
 
 # Cloud-init ISO with unique name
 resource "libvirt_cloudinit_disk" "cloudinit" {
+  count     = var.cloudinit_tpl != null ? 1 : 0
   name      = "${var.vm_name}-cloudinit-${substr(md5(var.cloudinit_tpl), 0, 6)}.iso"
   pool      = "default"
   user_data = var.cloudinit_tpl
@@ -41,7 +42,7 @@ resource "libvirt_domain" "vm" {
     volume_id = libvirt_volume.disk.id
   }
 
-  cloudinit = libvirt_cloudinit_disk.cloudinit.id
+  cloudinit = var.cloudinit_tpl != null ? libvirt_cloudinit_disk.cloudinit[0].id : null
 
   console {
     type        = "pty"
