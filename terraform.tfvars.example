@@ -13,7 +13,7 @@ vm_groups = {
   }  
 
   monitoring = {
-      count          = 2
+      count          = 1
       base_image     = "./images/debian-13-genericcloud-amd64.qcow2"
       memory         = "2048"
       vcpu           = 2
