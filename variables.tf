@@ -19,7 +19,7 @@ variable "vm_groups" {
     vcpu           = number
     disk_size      = number
     cloudinit_file = string
-    ip_address     = optional(string)
+    ip_address     = optional(list(string))
   }))
 }
 

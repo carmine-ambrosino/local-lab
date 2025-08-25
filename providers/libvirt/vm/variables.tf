@@ -40,6 +40,6 @@ variable "cloudinit_tpl" {
 
 variable "ip_address" {
   description = "Static IP address for the VM (must be inside the network_cidr)"
-  type        = string
+  type        = list(string)
   default     = null
 }
