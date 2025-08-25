@@ -1,8 +1,15 @@
 # 🧪 local-lab  
-**Your personal cloud-in-a-box.**  
-**Spin up virtual labs** with **OpenTofu** (or Terraform) + libvirt in **minutes.**  
+**Your personal cloud-lab locally.**  
+Build, test, and iterate cloud-like infrastructure — without touching the cloud.
 
-*Simple. Modular. Fun.*
+
+## 🚀 What is local-lab?
+`local-lab` is your **personal cloud simulator**, powered by [OpenTofu](https://opentofu.org/) or [Terraform](https://www.terraform.io/) and libvirt. It’s designed for developers, DevOps engineers, and infrastructure architects who want to prototype, test, and iterate fast — without waiting on cloud provisioning or burning budget.
+
+You get full-featured virtual labs, modular VM groups, cloud-init provisioning, and built-in monitoring — all running locally on your machine.
+
+> **TL;DR:** It’s like AWS, but it fits in your backpack.
+
 
 ## ✨ Why local-lab?
 Imagine spinning up a **Nextcloud server** ☁️ or a **Kali Linux hacking box** 🐉 with a single command.  
@@ -19,46 +26,22 @@ It’s like having **AWS on your laptop**, but without the bill 💸.
 ## ⚙️ Requirements
 - [OpenTofu](https://opentofu.org/) or [Terraform](https://www.terraform.io/) `>= 0.13`  
 - Linux host with **KVM/QEMU** and `libvirt`  
-- Enough **disk space**  
-  - Nextcloud VM disk size: **30 GB (max, thin-provisioned)**  
-  - Kali VM disk size: **80 GB (max, thin-provisioned)**  
+- Enough **RAM** and **disk space**   
   > 💡 Real usage is much smaller at first — the VM disk grows only when data is written.  
-- Downloaded cloud images (see below)  
 
 
 ## 🚀 Quickstart
 
-### 1. Download Images
+### 1. Download Cloud Images
 - [Debian 13 Generic Cloud](https://cloud.debian.org/images/cloud/trixie/latest/debian-13-genericcloud-amd64.qcow2)  
-- [Kali Linux 2025.2 QEMU](https://cdimage.kali.org/current/kali-linux-2025.2-qemu-amd64.7z) ➡️ unzip to `.qcow2`  
-
+- [Ubuntu 24.04 LTS](https://cloud-images.ubuntu.com/noble/current/noble-server-cloudimg-amd64.img)
 
 ### 2. Define your lab (`terraform.tfvars`)
-You describe what you want. `local-lab` makes it real.  
-
-```hcl
-vm_groups = {
-  nextcloud = {
-    count          = 1
-    base_image     = "./images/debian-13-genericcloud-amd64.qcow2"
-    memory         = 6162
-    vcpu           = 2
-    disk_size      = 30
-    cloudinit_file = "./cloud-init/nextcloud-s3-example.yaml"
-  }
-
-  kali = {
-    count          = 1
-    base_image     = "./images/kali-linux-2025.2-qemu-amd64.qcow2"
-    memory         = 2048
-    vcpu           = 2
-    disk_size      = 80
-    cloudinit_file = "./cloud-init/kali-example.yaml"
-  }
-}
+``` bash
+cp terraform.tfvars.example terraform.tfvars
 ```
 
-### 3. Launch local-lab
+### 3. Launch your local-lab
 ``` bash
 tofu init
 tofu apply
@@ -99,6 +82,5 @@ A:
 - ☁️ **Nextcloud** ➡️ Default login: `admin` / `changeme` but follow the setup described in [nextcloud-s3](https://github.com/carmine-ambrosino/nextcloud-s3/) before logging in. 
 
 
-## 💡 Final Thought
-`local-lab` is your **private mini-cloud**, always one command away.  
-Spin up, hack, test, self-host — all **from your laptop**.  
+## 🔥 Build Real Infrastructure. Locally.
+**Test smarter. Iterate faster. Build cloud-native systems — locally.**
