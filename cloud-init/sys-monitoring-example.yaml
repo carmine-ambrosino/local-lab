@@ -1,0 +1,66 @@
+#cloud-config
+package_update: true
+package_upgrade: true
+
+packages:
+  - sudo
+  - git
+  - ca-certificates
+  - curl
+
+write_files:
+  - path: /opt/setup/10-base-packages.sh
+    permissions: '0755'
+    owner: root:root
+    content: |
+      #!/bin/bash
+      set -euo pipefail
+      echo "[INFO] Base packages already installed via cloud-init..."
+  
+  - path: /opt/setup/20-docker-install.sh
+    permissions: '0755'
+    owner: root:root
+    content: |
+      #!/bin/bash
+      set -euo pipefail
+      echo "[INFO] Removing previous versions of Docker..."
+      apt-get remove -y docker.io docker-doc docker-compose podman-docker containerd runc || true
+
+      echo "[INFO] Adding Docker GPG key..."
+      install -m 0755 -d /etc/apt/keyrings
+      curl -fsSL https://download.docker.com/linux/debian/gpg -o /etc/apt/keyrings/docker.asc
+      chmod a+r /etc/apt/keyrings/docker.asc
+
+      echo "[INFO] Adding repository..."
+      codename=$(lsb_release -cs)
+      echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] \
+        https://download.docker.com/linux/debian $codename stable" \
+        | tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+      apt-get update
+      apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
+      systemctl enable --now docker
+
+
+  - path: /opt/setup/30-monitoring-setup.sh
+    permissions: '0755'
+    owner: root:root
+    content: |
+      #!/bin/bash
+      set -euo pipefail
+      echo "[INFO] Cloning System monitoring stack repo..."
+      git clone https://github.com/simona2606/system-monitoring-stack.git /opt/system-monitoring-stack
+      cd /opt/system-monitoring-stack/monitoring
+      echo "[INFO] Starting containers..."
+      docker compose up -d
+      
+runcmd:
+  - /opt/setup/10-base-packages.sh
+  - /opt/setup/20-docker-install.sh
+  - /opt/setup/30-monitoring-setup.sh
+  
+growpart:
+  mode: auto
+  devices: ['/']
+  ignore_growroot_disabled: false
