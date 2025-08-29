@@ -1,0 +1,18 @@
+#cloud-config
+package_update: true
+package_upgrade: true
+
+packages:
+  - sudo
+  - git
+  - ca-certificates
+  - curl
+
+write_files:
+  - path: /opt/setup/10-base-packages.sh
+    permissions: "0755"
+    owner: root:root
+    content: |
+      #!/bin/bash
+      set -euo pipefail
+      echo "[INFO] Base packages already installed via cloud-init..."

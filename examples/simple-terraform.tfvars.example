@@ -1,0 +1,14 @@
+#network_cidr = "10.0.2.0/24" # optional - default value: 192.168.250.0/24
+
+vm_groups = {
+  # Download: https://cloud.debian.org/images/cloud/trixie/latest/debian-13-genericcloud-amd64.qcow2
+  simple-vm = {
+    count          = 1
+    base_image     = "./images/debian-13-genericcloud-amd64.qcow2"
+    memory         = 2048
+    vcpu           = 2
+    disk_size      = 20 # GB
+    cloudinit_file = "./cloud-init/simple.yaml"
+    #ip_address     = ["10.0.2.17"] # optional
+  }
+}

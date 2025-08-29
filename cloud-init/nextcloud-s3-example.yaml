@@ -7,18 +7,19 @@ packages:
   - git
   - ca-certificates
   - curl
+  - wireshark
 
 write_files:
   - path: /opt/setup/10-base-packages.sh
-    permissions: '0755'
+    permissions: "0755"
     owner: root:root
     content: |
       #!/bin/bash
       set -euo pipefail
       echo "[INFO] Base packages already installed via cloud-init..."
-  
+
   - path: /opt/setup/20-docker-install.sh
-    permissions: '0755'
+    permissions: "0755"
     owner: root:root
     content: |
       #!/bin/bash
@@ -43,7 +44,7 @@ write_files:
       systemctl enable --now docker
 
   - path: /opt/setup/30-nextcloud-setup.sh
-    permissions: '0755'
+    permissions: "0755"
     owner: root:root
     content: |
       #!/bin/bash
@@ -54,9 +55,9 @@ write_files:
       cp .env.example .env
       echo "[INFO] Starting containers..."
       docker compose up -d
-      
+
   - path: /opt/setup/40-netdata-setup.sh
-    permissions: '0755'
+    permissions: "0755"
     owner: root:root
     content: |
       #!/bin/bash
@@ -73,6 +74,5 @@ runcmd:
 
 growpart:
   mode: auto
-  devices: ['/']
+  devices: ["/"]
   ignore_growroot_disabled: false
-

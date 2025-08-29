@@ -10,15 +10,15 @@ packages:
 
 write_files:
   - path: /opt/setup/10-base-packages.sh
-    permissions: '0755'
+    permissions: "0755"
     owner: root:root
     content: |
       #!/bin/bash
       set -euo pipefail
       echo "[INFO] Base packages already installed via cloud-init..."
-  
+
   - path: /opt/setup/20-docker-install.sh
-    permissions: '0755'
+    permissions: "0755"
     owner: root:root
     content: |
       #!/bin/bash
@@ -42,9 +42,8 @@ write_files:
 
       systemctl enable --now docker
 
-
   - path: /opt/setup/30-monitoring-setup.sh
-    permissions: '0755'
+    permissions: "0755"
     owner: root:root
     content: |
       #!/bin/bash
@@ -54,13 +53,13 @@ write_files:
       cd /opt/system-monitoring-stack/monitoring
       echo "[INFO] Starting containers..."
       docker compose up -d
-      
+
 runcmd:
   - /opt/setup/10-base-packages.sh
   - /opt/setup/20-docker-install.sh
   - /opt/setup/30-monitoring-setup.sh
-  
+
 growpart:
   mode: auto
-  devices: ['/']
+  devices: ["/"]
   ignore_growroot_disabled: false
